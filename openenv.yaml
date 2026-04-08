@@ -1,0 +1,35 @@
+metadata:
+  name: "email-triage-env"
+  version: "0.4.0"
+  description: >
+    Real-world B2B SaaS email triage environment with 11 novel mechanics:
+    CSAT decay meter, 3-stage consequence ladder, escalation budget, prompt injection
+    adversarial emails, confidence-calibrated rewards, legal_compliance department,
+    thread history, SLA deadlines, defer action, procedural generation, and
+    multi-seed evaluation. 4 difficulty tiers from 6 to 36+ emails.
+  author: "Gaurav"
+  tags: ["triage", "nlp", "support", "email", "customer-service", "classification", "openenv"]
+
+tasks:
+  - id: "easy"
+    description: >
+      6 routing emails. Explicit intents. Budget=2. Expected: > 0.85.
+  - id: "medium"
+    description: >
+      9 emails. Adds angry customers needing escalation. Consequence chains
+      activate. Budget=5. Expected: ~0.50 for naive models.
+  - id: "hard"
+    description: >
+      28+ emails (grows with consequences). Mixed-signal traps, fraud disputes,
+      GDPR/security incidents (legal_compliance), prompt injection attacks,
+      thread history context, emotionally distressed users, multilingual content.
+      CSAT decay can terminate episode early. 3-stage consequence ladder.
+      Budget=8. Expected: < 0.30.
+  - id: "enterprise"
+    description: >
+      36+ emails. Everything in hard plus 8 internal noise templates (calendar
+      invites, automated alerts, HR emails, newsletters). Tests signal-to-noise
+      at volume. Budget=12. Expected: < 0.20.
+
+entrypoint:
+  command: ["python", "-m", "uvicorn", "server.app:app", "--host", "0.0.0.0", "--port", "7860"]
